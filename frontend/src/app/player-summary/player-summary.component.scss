@@ -1,0 +1,54 @@
+/* player-summary.component.scss */
+
+.player-summary-component {
+  /* Style the entire component */
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+
+  /* Style the loading message */
+  .loading-message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Style the error message */
+  .error-message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f00;
+  }
+
+  /* Style the player summary data */
+  .player-summary-data {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+
+    /* Style individual data points */
+    p {
+      margin: 5px 0;
+    }
+
+    /* Style the retry button */
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      margin-top: 10px;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .shot-chart {
+  }
+}

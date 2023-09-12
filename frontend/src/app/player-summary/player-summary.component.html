@@ -1,0 +1,36 @@
+<div *ngIf="isLoading; else loadedData">
+  <!-- Show a loading spinner or message -->
+  <p>Loading player summary data...</p>
+</div>
+
+<ng-template #loadedData>
+  <div *ngIf="error; else playerSummaryData">
+    <!-- Show an error message -->
+    <p>{{ error }}</p>
+    <button (click)="reloadPlayerSummary()">Retry</button>
+  </div>
+
+  <ng-template #playerSummaryData>
+    <!-- Display player summary data when available -->
+    <h1>Player Summary</h1>
+    <p>Name: {{ playerSummary.name }}</p>
+    <p>Points: {{ playerSummary.points }}</p>
+    <p>Assists: {{ playerSummary.assists }}</p>
+    <p>Rebounds: {{ playerSummary.rebounds }}</p>
+
+    <!-- Display additional statistics -->
+    <p>Minutes Played: {{ playerSummary.minutesPlayed }}</p>
+    <p>Defensive Fouls: {{ playerSummary.defensiveFouls }}</p>
+    <p>Offensive Fouls: {{ playerSummary.offensiveFouls }}</p>
+    <p>Free Throws Made: {{ playerSummary.freeThrowsMade }}</p>
+    <p>Free Throws Attempted: {{ playerSummary.freeThrowsAttempted }}</p>
+    <p>Two-Pointers Made: {{ playerSummary.twoPointersMade }}</p>
+    <p>Two-Pointers Attempted: {{ playerSummary.twoPointersAttempted }}</p>
+    <p>Three-Pointers Made: {{ playerSummary.threePointersMade }}</p>
+    <p>Three-Pointers Attempted: {{ playerSummary.threePointersAttempted }}</p>
+  </ng-template>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="loading-message">Loading player summary...</div>
+</ng-template>
