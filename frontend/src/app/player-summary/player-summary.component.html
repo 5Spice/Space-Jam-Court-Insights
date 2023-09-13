@@ -1,12 +1,12 @@
 <div *ngIf="isLoading; else loadedData">
-  <!-- Show a loading spinner or message -->
-  <p>Loading player summary data...</p>
+  <!-- Show a loading spinner -->
+  <div class="loading-spinner"></div>
 </div>
 
 <ng-template #loadedData>
   <div *ngIf="error; else playerSummaryData">
-    <!-- Show an error message -->
-    <p>{{ error }}</p>
+    <!-- Show an error message and retry button -->
+    <p class="error-message">{{ error }}</p>
     <button (click)="reloadPlayerSummary()">Retry</button>
   </div>
 
@@ -30,7 +30,3 @@
     <p>Three-Pointers Attempted: {{ playerSummary.threePointersAttempted }}</p>
   </ng-template>
 </div>
-
-<ng-template #loadingTemplate>
-  <div class="loading-message">Loading player summary...</div>
-</ng-template>

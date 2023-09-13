@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 import { PlayersService } from '../_services/players.service';
 import { HttpClient } from '@angular/common/http'; // Import HttpClient
+import { PlayerSummary } from './player-summary.interface'; // Import the PlayerSummary interface
 
 @UntilDestroy()
 @Component({
@@ -15,7 +16,7 @@ export class PlayerSummaryComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   error: string | null = null;
 
-  playerSummary: any = {
+  playerSummary: PlayerSummary = {
     name: 'N/A',
     points: 'N/A',
     assists: 'N/A',
@@ -39,19 +40,37 @@ export class PlayerSummaryComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const playerId = 1; // Replace with the player ID you want to fetch
-    const apiUrl = `http://localhost:8000/api/v1/playerSummary/${playerId}`; 
+    this.activatedRoute.params.pipe(untilDestroyed(this)).subscribe((params) => {
+      const playerId = params.playerID; // Get player ID from the route parameter
+      const apiUrl = `http://localhost:8000/api/v1/playerSummary/${playerId}`;
 
-    this.http.get(apiUrl).pipe(untilDestroyed(this)).subscribe(
-      (data: any) => {
-        this.isLoading = false;
-        this.playerSummary = data.apiResponse;
-      },
-      (error) => {
-        this.isLoading = false;
-        this.error = 'Failed to load player summary data.';
-      }
-    );
+      this.http.get(apiUrl).pipe(untilDestroyed(this)).subscribe(
+        (data: PlayerSummary) => {
+          this.isLoading = false;
+          this.playerSummary = data;
+
+          // Set the shot points based on the provided shot data
+          this.setShotPoints(data.shots);
+        },
+        (error) => {
+          this.isLoading = false;
+          this.error = 'Failed to load player summary data.';
+        }
+      );
+    });
+  }
+
+  setShotPoints(shotData: any[]): void {
+    // Assuming shotData is an array of shot objects with properties: isMake, locationX, and locationY
+    shotData.forEach((shot) => {
+      const shotPoint = document.createElement('div');
+      shotPoint.className = 'shot-point';
+      shotPoint.style.setProperty('--locationX', `${shot.locationX}ft`);
+      shotPoint.style.setProperty('--locationY', `${shot.locationY}ft`);
+
+      // Append the shot point to the shot chart container
+      document.querySelector('.shot-chart-container')?.appendChild(shotPoint);
+    });
   }
 
   ngOnDestroy() {}

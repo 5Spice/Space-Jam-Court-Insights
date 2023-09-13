@@ -23,7 +23,7 @@ class Command(BaseCommand):
 
        # Load player names from 'players.json'
         players_data = {}
-        players_json_file = '/workspaces/technical-project-deadline-09-08-23-5Spice/backend/raw_data/players.json'
+        players_json_file = '/workspaces/Space-Jam-Court-Insights/backend/raw_data/players.json'
         with open(players_json_file, 'r') as players_file:
             players_list = json.load(players_file)
             players_data = {player['id']: player['name'] for player in players_list}

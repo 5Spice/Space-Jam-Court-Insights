@@ -48,7 +48,37 @@
       }
     }
   }
-
+    /* Style the shot chart */
   .shot-chart {
+    /* Set the size and background color of the shot chart container */
+    width: 100%;
+    height: 300px;
+    background-color: #eee;
+    position: relative; /* Make it a relative position container for absolute positioning of shot points */
+
+    .hoop {
+      width: 20px;
+      height: 20px;
+      background-color: #ff5733; 
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0; /* Position it at the bottom-center */
+
+    }
+
+    /* Style individual shot points */
+    .shot-point {
+      /* Define the style for each shot point */
+      width: 10px;
+      height: 10px;
+      background-color: #007bff;
+      border-radius: 50%;
+      position: absolute;
+
+      /* Set the default position for the shot points */
+      bottom: calc((100% - 7.8ft) / 23.75ft * var(--locationY));
+      left: calc((100% - 22ft) / 23.75ft * var(--locationX)); /* Adjusted based on Three-Point Line distance */
+
+    }
   }
 }
