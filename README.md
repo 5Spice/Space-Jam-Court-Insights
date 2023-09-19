@@ -15,6 +15,11 @@ Space Jam Court Insights is a web application that allows users to access and an
 
 Before you begin, ensure you have met the following requirements:
 
-- **Backend:** The Django backend must be set up and running, including the database with player statistics.
+- **Backend:** Docker was used to install PostgreSQL.  The Django backend must be set up and running, including the database with player statistics.  Package requirements are in requirements.txt
 
 - **Frontend:** The Angular frontend must be installed and configured properly.
+
+#### Getting Started
+
+- **Backend:** Ensure database is up and hosted on PostgreSQL.  Ensure packages are installed and start server hosted on http://localhost:8000/
+- **Frontend:** Frontend is installed and hosted via Node on http://localhost:4200/
